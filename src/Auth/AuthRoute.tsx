@@ -2,19 +2,18 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { getCookie } from "utils/helper";
 
-export const ProtectedRoute = () => {
+export const AuthRoute = () => {
     const navigate = useNavigate();
   
     useEffect(() => {
       const token = getCookie('jwt');
-      if (!token) {
-        navigate("/signin");
+      if (token) {
+        navigate("/");
       }
     }, [navigate]);
 
     return (
       <section>
-        <h1>Protected</h1>
         <Outlet />
       </section>
     );

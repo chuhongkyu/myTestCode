@@ -1,4 +1,5 @@
 import App from "App"
+import { AuthRoute } from "Auth/AuthRoute";
 import Login from "Auth/Login";
 import Signup from "Auth/Signup";
 import Mypage from "pages/Mypage";
@@ -8,26 +9,34 @@ const routerInfo = [
     {
         path: "/",
         element: <App/>,
-    },
-    {
-        path: "/login",
-        element: <Login/>,
-    },
-    {
-        path: "/signup",
-        element: <Signup/>,
-    },
-    {
-        path: "/protect",
-        element: <ProtectedRoute/>,
         children: [
             {
-                path: "login",
-                element: <Mypage/>,
+                path: "auth",
+                element: <AuthRoute/>,
+                children: [
+                    {
+                        path: "login",
+                        element: <Login/>,
+                    },
+                    {
+                        path: "signup",
+                        element: <Signup/>,
+                    },
+                ]
+            },
+            {
+                path: "protect",
+                element: <ProtectedRoute/>,
+                children: [
+                    {
+                        path: "mypage",
+                        element: <Mypage/>,
+                    },
+                ] 
             },
         ]
-        
     },
+    
 ]
 
 export default routerInfo

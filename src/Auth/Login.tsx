@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { mockLogin } from "../../mock/auth";
+import { setCookie } from "utils/helper";
 
 const Login = () => {
     const [formData, setFromData] = useState({
@@ -11,8 +12,8 @@ const Login = () => {
         e.preventDefault();
         try {
           const response = await mockLogin(formData);
+          setCookie('jwt', response.data.token, 1);
           console.log(response);
-    
         } catch (error) {
           console.log((error as Error).message);
         }
