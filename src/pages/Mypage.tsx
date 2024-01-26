@@ -1,5 +1,3 @@
-import './Mypage.css';
-
 function Mypage() {
   return (
     <div>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Login from './Login';
-import { mockLogin } from '../../mock/auth';
+import { mockLogin } from 'mock/auth';
 
-jest.mock('../../mock/auth', () => ({
-  mockLogin: jest.fn(),
+jest.mock('mock/auth', () => ({
+  mockLogin: jest.fn()
 }));
+
 
 test('로그인 폼이 제대로 렌더링되는지 확인', () => {
   render(<Login />);
@@ -36,13 +37,13 @@ test('로그인 테스트', async() => {
   const passwordInput = screen.getByPlaceholderText("비밀번호")as HTMLInputElement;
   const button = screen.getByRole('button', { name: 'Login' });
 
-  fireEvent.change(emailInput, { target: { value: 'user@example.com' } });
+  fireEvent.change(emailInput, { target: { value: 'exist@naver.com' } });
   fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
   fireEvent.click(button);
   
   await waitFor(() => {
-    expect(mockLogin).toHaveBeenCalledWith({ email: 'user@example.com', password: 'password123' });
+    expect(mockLogin).toHaveBeenCalledWith({ email: 'exist@naver.com', password: 'password123' });
   });
 });
 
