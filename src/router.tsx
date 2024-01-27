@@ -2,6 +2,7 @@ import App from "App"
 import { AuthRoute } from "Auth/AuthRoute";
 import Login from "Auth/Login";
 import Signup from "Auth/Signup";
+import NotFound from "NotFound";
 import Mypage from "pages/Mypage";
 import { ProtectedRoute } from "pages/ProtectedRoute";
 
@@ -34,7 +35,8 @@ const routerInfo = [
                     },
                 ] 
             },
-        ]
+        ],
+        errorElement: <NotFound />,
     },
     
 ]
