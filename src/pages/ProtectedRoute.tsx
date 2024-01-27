@@ -8,7 +8,7 @@ export const ProtectedRoute = () => {
     useEffect(() => {
       const token = getCookie('jwt');
       if (!token) {
-        navigate("/signin");
+        navigate("/auth/login");
       }
     }, [navigate]);
 
