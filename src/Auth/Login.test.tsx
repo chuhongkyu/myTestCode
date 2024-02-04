@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Login from './Login';
 import { mockLogin } from 'mock/auth';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('mock/auth', () => ({
   mockLogin: jest.fn()
@@ -9,7 +10,7 @@ jest.mock('mock/auth', () => ({
 
 
 test('로그인 폼이 제대로 렌더링되는지 확인', () => {
-  render(<Login />);
+  render(<Login />,{ wrapper: BrowserRouter });
   const emailLabel = screen.getByLabelText("이메일");
   const passwordLabel = screen.getByLabelText("비밀번호");
   const button = screen.getByRole('button', { name: 'Login' });
@@ -20,7 +21,7 @@ test('로그인 폼이 제대로 렌더링되는지 확인', () => {
 });
 
 test('입력 테스트', () => {
-  render(<Login />);
+  render(<Login />,{ wrapper: BrowserRouter });
   const emailInput = screen.getByPlaceholderText("이메일") as HTMLInputElement;
   const passwordInput = screen.getByPlaceholderText("비밀번호")as HTMLInputElement;
 
@@ -32,7 +33,7 @@ test('입력 테스트', () => {
 });
 
 test('로그인 테스트', async() => {
-  render(<Login />);
+  render(<Login />,{ wrapper: BrowserRouter });
   const emailInput = screen.getByPlaceholderText("이메일") as HTMLInputElement;
   const passwordInput = screen.getByPlaceholderText("비밀번호")as HTMLInputElement;
   const button = screen.getByRole('button', { name: 'Login' });
@@ -49,7 +50,7 @@ test('로그인 테스트', async() => {
 
 
 test('로그인 틀렸을 때', async() => {
-  render(<Login />);
+  render(<Login />,{ wrapper: BrowserRouter });
   const emailInput = screen.getByPlaceholderText("이메일") as HTMLInputElement;
   const passwordInput = screen.getByPlaceholderText("비밀번호")as HTMLInputElement;
   const button = screen.getByRole('button', { name: 'Login' });

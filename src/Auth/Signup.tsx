@@ -1,7 +1,9 @@
 import { mockSignUp } from "mock/auth"
 import { ChangeEvent, FormEvent, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Signup = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -11,7 +13,10 @@ const Signup = () => {
         e.preventDefault();
         try{
             const response = await mockSignUp(formData)
-            console.log(response)
+            // console.log(response)
+            if(response?.message){
+                navigate('/auth/login')
+            }
         }catch (error) {
             console.log((error as Error).message);
         }

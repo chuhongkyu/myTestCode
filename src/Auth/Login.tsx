@@ -1,8 +1,10 @@
 import { FormEvent, useState } from "react";
 import { mockLogin } from "mock/auth";
 import { setCookie } from "utils/helper";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate()
     const [formData, setFromData] = useState({
         email: "",
         password: "",
@@ -12,8 +14,12 @@ const Login = () => {
       e.preventDefault();
       try {
         const response = mockLogin(formData);
-        setCookie('jwt', response.data.token, 1);
-        console.log(response.data.token);
+        
+        if(response.data.token){
+          setCookie('jwt', response.data.token, 1);
+          // console.log(response.data.token);
+          navigate('/')
+        }
       } catch (error) {
         console.log((error as Error).message);
       }
