@@ -37,3 +37,18 @@ export const mockLogin = (userData:IUser): LoginResponse => {
     throw new Error("비밀번호가 올바르지 않습니다.");
   }
 };
+
+export const mockMyPage = (authToken:string) => {
+
+  const getUserInfoFromToken = (token:string) => {
+    const mockUser = {
+      email: 'exist@naver.com',
+      password: 'password123'
+    };
+    if(token) return mockUser;
+  };
+
+  const userInfo = getUserInfoFromToken(authToken);
+
+  return { data: { user: userInfo }, message: '마이페이지 조회 성공' };
+};
